@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_send_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="请输入发送内容，内容转 byte[] 发送"
+            android:minLines="5"
+            android:visibility="invisible"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSend"
+            android:text="发送"
+            android:visibility="invisible"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="启动"
+            android:onClick="start"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="停止"
+            android:onClick="stop"
+            />
+        <EditText
+            android:id="@+id/et_go_site"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="1"
+            />
+
+        <Button
+            android:id="@+id/bt_go_site"
+            android:text="测试：移动到第三站点"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="bt_go_site"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="close"
+            android:visibility="invisible"
+            android:text="关闭串口" />
+    </LinearLayout>
+
+
+</RelativeLayout>

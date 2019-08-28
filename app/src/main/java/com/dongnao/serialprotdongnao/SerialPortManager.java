@@ -120,7 +120,7 @@ public class SerialPortManager {
 
         File file = new File(path);
 //        获取root权限
-        //Utils.chmod777(file);
+        Utils.chmod777(file);
 
         FileDescriptor mFd=open(path, baudRate);
         mFileInputStream = new FileInputStream(mFd);
