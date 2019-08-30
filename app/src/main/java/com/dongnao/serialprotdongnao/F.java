@@ -120,4 +120,83 @@ public class F {
     }
 
 
+    //2个字节数组拼接
+    /**
+     *
+     * @param data1
+     * @param data2
+     * @return data1 与 data2拼接的结果
+     */
+    public static byte[] addBytes(byte[] data1, byte[] data2) {
+        byte[] data3 = new byte[data1.length + data2.length];
+        System.arraycopy(data1, 0, data3, 0, data1.length);
+        System.arraycopy(data2, 0, data3, data1.length, data2.length);
+        return data3;
+    }
+
+    /**
+     * byte数组转换为二进制字符串,每个字节以","隔开  骗人的
+     **/
+    public static String byteArrToBinStr(byte[] b) {
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < b.length; i++) {
+            result.append(Long.toString(b[i] & 0xff, 2) + ",");
+        }
+        return result.toString().substring(0, result.length() - 1);
+    }
+
+    //没用
+    public static String getBinaryStrFromByteArr(byte[] bArr){
+        String result ="";
+        for(byte b:bArr ){
+            result += getBinaryStrFromByte(b);
+        }
+        return result;
+    }
+
+    public static  String getBinaryStrFromByte(byte b){
+        String result ="";
+        byte a = b; ;
+        for (int i = 0; i < 8; i++){
+            byte c=a;
+            a=(byte)(a>>1);//每移一位如同将10进制数除以2并去掉余数。
+            a=(byte)(a<<1);
+            if(a==c){
+                result="0"+result;
+            }else{
+                result="1"+result;
+            }
+            a=(byte)(a>>1);
+        }
+        return result;
+    }
+    /**
+     * byte数组中取int数值
+     *
+     * @param src
+     *            byte数组
+     * @return int数值
+     */
+    public static int bytesToInt(byte[] src) {
+        int value;
+        value = (int) ((src[0] & 0xFF)
+                | ((src[1] & 0xFF)<<8)
+                | ((src[2] & 0xFF)<<16)
+                | ((src[3] & 0xFF)<<24));
+        return value;
+    }
+    public static byte[] hexStringToByte(String hex) {
+        int len = (hex.length() / 2);
+        byte[] result = new byte[len];
+        char[] achar = hex.toCharArray();
+        for (int i = 0; i < len; i++) {
+            int pos = i * 2;
+            result[i] = (byte) (toByte(achar[pos]) << 4 | toByte(achar[pos + 1]));
+        }
+        return result;
+    }
+    private static byte toByte(char c) {
+        byte b = (byte) "0123456789ABCDEF".indexOf(c);
+        return b;
+    }
 }

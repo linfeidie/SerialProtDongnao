@@ -48,21 +48,80 @@
             android:id="@+id/et_go_site"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="1"
+            android:text="上,右"
+            android:hint="第一条路线"
+            />
+        <EditText
+            android:id="@+id/et_go_site_fix"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="右,上"
+            android:hint="第二条路线"
             />
 
         <Button
             android:id="@+id/bt_go_site"
-            android:text="测试：移动到第三站点"
+            android:text="测试：移动到第N个站点"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:onClick="bt_go_site"/>
+        <Button
+            android:id="@+id/bt_go_back"
+            android:text="回程"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="bt_go_back"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="close"
             android:visibility="invisible"
             android:text="关闭串口" />
+
+        <TextView
+            android:id="@+id/tv_running"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/tv_power"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/tv_zhan_point"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/radioButton_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:checked="true"
+                android:text="测试" />
+            <RadioButton
+                android:id="@+id/radioButton_produce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:text="正式" />
+        </RadioGroup>
     </LinearLayout>
 
 

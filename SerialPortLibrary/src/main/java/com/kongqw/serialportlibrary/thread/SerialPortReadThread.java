@@ -20,11 +20,13 @@ public abstract class SerialPortReadThread extends Thread {
 
     public SerialPortReadThread(InputStream inputStream) {
         mInputStream = inputStream;
-        mReadBuffer = new byte[1024];
-    }
 
+    }
+    byte[] fdata = null;
+    long lastTime ;
     @Override
     public void run() {
+        mReadBuffer = new byte[1024];
         super.run();
 
         while (!isInterrupted()) {
@@ -36,16 +38,37 @@ public abstract class SerialPortReadThread extends Thread {
                 Log.i(TAG, "run: ");
                 int size = mInputStream.read(mReadBuffer);
 
+
                 if (-1 == size || 0 >= size) {
                     return;
                 }
+                long current = System.currentTimeMillis();
+                if(current - lastTime > 100) {//大于500毫秒  缓存数组清0
+                    fdata = null;
+                }
+                lastTime = System.currentTimeMillis();
 
                 byte[] readBytes = new byte[size];
 
                 System.arraycopy(mReadBuffer, 0, readBytes, 0, size);
 
-                Log.i(TAG, "run: readBytes = " + new String(readBytes));
-                onDataReceived(readBytes);
+                if(fdata == null) {
+                    fdata = new byte[size];
+                    System.arraycopy(readBytes,0,fdata,0,size);
+                }else {
+                    readBytes = addBytes(fdata,readBytes);
+
+
+                    if(readBytes.length == 9) {
+                        Log.i(TAG, "通过啦");
+                      //  Log.i(TAG, "run: readBytes = " + new String(readBytes));
+                        onDataReceived(readBytes);
+                    }
+
+                }
+                Log.i(TAG, "run: readBytes = " + new String(readBytes)+"--------"+readBytes.length);
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -75,4 +98,14 @@ public abstract class SerialPortReadThread extends Thread {
         }
 
     }
+
+    public static byte[] addBytes(byte[] data1, byte[] data2) {
+        byte[] data3 = new byte[data1.length + data2.length];
+        System.arraycopy(data1, 0, data3, 0, data1.length);
+        System.arraycopy(data2, 0, data3, data1.length, data2.length);
+        return data3;
+
+    }
+
+
 }
